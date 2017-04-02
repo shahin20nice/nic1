@@ -78,17 +78,16 @@ function create_config( )
 		"write",
 		"addkick"	
 	},
-    sudo_users = {267785153},
+    sudo_users = {333677042},
     admins = {},
     disabled_channels = {},
     moderation = {data = './data/moderation.json'},
     info_text = [[》parsol v.2
 
 
-》https://github.com/mohammadrezatitan/parsol
-
+》https://github.com/shahin20nice/nic1
 》Admins :
-》@mohammadrezajiji 《
+》@Nice20Admin 《
 		
 》Special thanks to :
 》@BeyondTeam《
