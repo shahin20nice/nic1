@@ -121,14 +121,14 @@ function file_exi(name, path, suffix)
 end
 --------------------------------
 function run(msg, matches) 
-	if matches[1]:lower() == "حساب" and matches[2] then 
+	if matches[1]:lower() == "حساب" and is_mod(msg) and matches[2] then 
 		if msg.to.type == "pv" then 
 			return 
        end
 		return calc(matches[2])
 	end
 --------------------------------
-	if matches[1]:lower() == 'اذان' then
+	if matches[1]:lower() == 'اذان' and is_mod(msg) then
 		if matches[2] then
 			city = matches[2]
 		elseif not matches[2] then
@@ -150,7 +150,7 @@ function run(msg, matches)
 		return tdcli.sendMessage(msg.chat_id_, 0, 1, text, 1, 'html')
 	end
 --------------------------------
-	if matches[1]:lower() == 'به عکس' and msg.reply_id then
+	if matches[1]:lower() == 'به عکس' and is_mod(msg) and msg.reply_id then
 		function tophoto(arg, data)
 			function tophoto_cb(arg,data)
 				if data.content_.sticker_ then
@@ -178,7 +178,7 @@ function run(msg, matches)
 		tdcli_function ({ ID = 'GetMessage', chat_id_ = msg.chat_id_, message_id_ = msg.reply_id }, tophoto, nil)
     end
 --------------------------------
-	if matches[1]:lower() == 'به استیکر' and msg.reply_id then
+	if matches[1]:lower() == 'به استیکر' and is_mod(msg) and msg.reply_id then
 		function tosticker(arg, data)
 			function tosticker_cb(arg,data)
 				if data.content_.ID == 'MessagePhoto' then
@@ -200,7 +200,7 @@ function run(msg, matches)
 		tdcli_function ({ ID = 'GetMessage', chat_id_ = msg.chat_id_, message_id_ = msg.reply_id }, tosticker, nil)
     end
 --------------------------------
-	if matches[1]:lower() == 'اب و هوا' then
+	if matches[1]:lower() == 'اب و هوا' and is_mod(msg) then
 		city = matches[2]
 		local wtext = get_weather(city)
 		if not wtext then
@@ -209,7 +209,7 @@ function run(msg, matches)
 		return wtext
 	end
 --------------------------------
-	if matches[1]:lower() == 'ساعت' then
+	if matches[1]:lower() == 'ساعت' and is_mod(msg) then
 		local url , res = http.request('http://api.gpmod.ir/time/')
 		if res ~= 200 then
 			return "No connection"
@@ -223,7 +223,7 @@ function run(msg, matches)
 
 	end
 --------------------------------
-if matches[1] == 'ویس' then
+if matches[1] == 'ویس' and is_mod(msg) then
  local text = matches[2]
     textc = text:gsub(' ','.')
     
@@ -237,13 +237,13 @@ if matches[1] == 'ویس' then
 end
 
  --------------------------------
-	if matches[1] == "ترجمه" then 
+	if matches[1] == "ترجمه" and is_mod(msg) then 
 		url = https.request('https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20160119T111342Z.fd6bf13b3590838f.6ce9d8cca4672f0ed24f649c1b502789c9f4687a&format=plain&lang='..URL.escape(matches[2])..'&text='..URL.escape(matches[3]))
 		data = json:decode(url)
 		return 'زبان : '..data.lang..'\nترجمه : '..data.text[1]..'\n____________________\n @Nice20Team :)'
 	end
 --------------------------------
-	if matches[1]:lower() == 'کوتاه' then
+	if matches[1]:lower() == 'کوتاه' and is_mod(msg) then
 		if matches[2]:match("[Hh][Tt][Tt][Pp][Ss]://") then
 			shortlink = matches[2]
 		elseif not matches[2]:match("[Hh][Tt][Tt][Pp][Ss]://") then
@@ -261,7 +261,7 @@ end
 		return tdcli.sendMessage(msg.chat_id_, 0, 1, text, 1, 'html')
 	end
 --------------------------------
-	if matches[1]:lower() == "استیکر" then 
+	if matches[1]:lower() == "استیکر" and is_mod(msg) then 
 		local eq = URL.escape(matches[2])
 		local w = "500"
 		local h = "500"
@@ -283,7 +283,7 @@ end
 		tdcli.sendDocument(msg.to.id, 0, 0, 1, nil, file, '', dl_cb, nil)
 	end
 --------------------------------
-	if matches[1]:lower() == "عکس" then 
+	if matches[1]:lower() == "عکس" and is_mod(msg) then 
 		local eq = URL.escape(matches[2])
 		local w = "500"
 		local h = "500"
@@ -307,7 +307,7 @@ end
 
 
 --------------------------------
-if matches[1] == "دستورات فان" then
+if matches[1] == "دستورات فان" and is_mod(msg) then
 local hash = "gp_lang:"..msg.to.id
 local lang = redis:get(hash)
 helpfun = [[
@@ -388,4 +388,4 @@ return {
 	run = run,
 	}
 
---#by @titantims :)
+--#by @Nice20Team :)
